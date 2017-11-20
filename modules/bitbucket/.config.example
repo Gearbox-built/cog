@@ -1,0 +1,9 @@
+#!/bin/bash
+# config-load
+#
+# shellcheck disable=SC2034
+{
+BITBUCKET_USER=user
+BITBUCKET_API=key
+BITBUCKET_PROJECT=project
+}
