@@ -175,7 +175,7 @@ deploy::main() {
         exit_cog
       else
         usage "cog deploy" "prep,db,wp"
-        exit 1
+        exit_cog
       fi
       ;;
   esac

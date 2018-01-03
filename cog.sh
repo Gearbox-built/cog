@@ -85,8 +85,15 @@ check_requirements() {
   done
 }
 
-exit_project() { printf "\n${RED}NO! BAD!${NC} Please pass in a project name with: [-n | --name]\nExiting...\n\n"; exit 1; }
-exit_cog() { exit 1; }
+exit_project() {
+  printf "\n${RED}NO! BAD!${NC} Please pass in a project name with: [-n | --name]\nExiting...\n\n"
+  exit_cog
+}
+
+exit_cog() {
+  check_for_updates
+  exit 1
+}
 
 
 #
@@ -150,7 +157,6 @@ main() {
       ;;
     *)
       if [[ $(type -t "${1}::main") == 'function' ]]; then
-        check_for_updates
         "${1}::main" "${@:2}"
         exit_cog
       fi

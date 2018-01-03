@@ -49,7 +49,7 @@ server::main() {
         exit_cog
       else
         usage "cog server" "login,ssh,account,db"
-        exit 1
+        exit_cog
       fi
       ;;
   esac

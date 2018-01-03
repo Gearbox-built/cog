@@ -299,7 +299,7 @@ create::main() {
         usage "cog create" "$sub"
 
         # printf "${GRAY}The wp param is actually optional.${NC}\n\n"
-        exit 1
+        exit_cog
       fi
       ;;
   esac

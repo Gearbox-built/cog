@@ -145,7 +145,7 @@ pantheon::main() {
         exit_cog
       else
         usage "cog pantheon" "create,push,pull,db,files"
-        exit 1
+        exit_cog
       fi
       ;;
   esac

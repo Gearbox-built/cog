@@ -51,7 +51,7 @@ check_for_updates() {
   fi
 
   if [ "$git_local" = "$git_remote" ]; then
-    printf "\nHarro.\n\n"
+    printf "Nothing new.\n\n"
   elif [ "$git_local" = "$git_base" ]; then
     local message; message="Script out of date. Run cog --update for the latest."
     if [[ -n $REQUIRE_UPDATE ]]; then

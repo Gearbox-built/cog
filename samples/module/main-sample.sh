@@ -37,7 +37,7 @@ sample::main() {
         exit_cog
       else
         usage "cog sample" "task,another-task,lib"
-        exit 1
+        exit_cog
       fi
       ;;
   esac

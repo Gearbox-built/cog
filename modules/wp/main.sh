@@ -210,7 +210,7 @@ wp::main() {
         exit_cog
       else
         usage "cog wp" "theme,bedrock,plugins"
-        exit 1
+        exit_cog
       fi
       ;;
   esac

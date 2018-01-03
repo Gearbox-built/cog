@@ -143,7 +143,7 @@ bitbucket::main() {
       ;;
     *)
       usage "cog bitbucket" "create,delete,setup,check,clone"
-      exit 1
+      exit_cog
       ;;
   esac
 }

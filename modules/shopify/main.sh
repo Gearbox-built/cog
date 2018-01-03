@@ -116,7 +116,7 @@ shopify::main() {
       ;;
     *)
       usage "cog shopify" "install,clone"
-      exit 1
+      exit_cog
       ;;
   esac
 }
