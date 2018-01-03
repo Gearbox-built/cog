@@ -91,4 +91,7 @@ update_self() {
     printf "Now using the ${GREEN}latest${NC} Cog!."
   fi
   printf "\n--------------------------------------------------------\n"
+
+  # Only exit exception
+  exit 1
 }
