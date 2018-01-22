@@ -3,13 +3,13 @@
 # Cog WordPress/Roots Module
 # Author: Troy McGinnis
 # Company: Gearbox
-# Updated: August 4, 2017
+# Updated: January 21, 2018
 #
-WP_MODULE_VERSION="1.01"
+WP_MODULE_VERSION="1.0.1"
 #
 # HISTORY:
 #
-# * 2017-08-04 - v1.0.1 - Default WP install, small changes
+# * 2018-01-21 - v1.0.1 - Default WP install
 # * 2016-09-19 - v1.0.0 - First Creation
 #
 # ##################################################
@@ -21,9 +21,37 @@ source_lib "${BASH_SOURCE[0]}"
 # Updates the WordPress configuration.
 #
 wp::wp_install() {
+  for i in "$@"
+  do
+    case $i in
+      --name=*)
+        local name="${i#*=}"
+        ;;
+      --dir=*)
+        local dir="${i#*=}"
+        ;;
+      --db=*)
+        local db="${i#*=}"
+        ;;
+      --db-user=*)
+        local db_user="${i#*=}"
+        ;;
+      --db-pass=*)
+        local db_pass="${i#*=}"
+        ;;
+    esac
+  done
+
+  local dir; dir=${dir:-$( pwd )}
+  local db; db=${db:-$name}
+  local db_user; db_user="${db_user:-root}"
+  local db_pass; db_pass="${db_pass:-root}"
+
+  cd "$dir" || exit
+
   message "Installing WP..."
-  # wp core download
-  # wp core install
+  wp core download
+  wp config create --dbname="$name" --dbuser="$db_user" --dbpass="$db_pass"
 }
 
 

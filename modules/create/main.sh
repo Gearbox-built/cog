@@ -31,7 +31,7 @@ CREATE_MODULE_VERSION="1.02"
 create::wp() {
   # Check WP CLI right away
   wp::check_wp_cli
-  local dev; local pantheon; pantheon=true
+  local dev;
 
   for i in "$@"
   do
@@ -62,8 +62,7 @@ create::wp() {
         local pantheon=false
         ;;
       --pantheon)
-        # local pantheon=true
-        local pantheon=false
+        local pantheon=true
         local bedrock=false
         ;;
     esac
@@ -120,8 +119,11 @@ create::wp() {
   # Install WordPress
   message "Activating WP..."
   wp core install --url="$install_url" --title="$human" --admin_user="$admin_user" --admin_password="$admin_pass" --admin_email="${email}"
-  wp::theme_install --url="$url" --dir="$theme_dir" --name="$name" --human="$human" --dev="$dev"
-  wp::plugins_install --dir="$plugin_dir"
+
+  if [[ -n "$bedrock" || -n "$pantheon" ]]; then
+    wp::theme_install --url="$url" --dir="$theme_dir" --name="$name" --human="$human" --dev="$dev"
+    wp::plugins_install --dir="$plugin_dir"
+  fi
 
   cd - > /dev/null || exit
 
@@ -163,7 +165,15 @@ create::static() {
   local human; human=${human:-$name}
   create::variables
 
+  # Gogogo...
   header "Creating Static Project:" "$human"
+
+  # Useful output
+  printf "\n${GRAY}Project Name: %s${NC}\n" "$name"
+  printf "${GRAY}Human Name: %s${NC}\n" "$human"
+  printf "${GRAY}Project Directory: %s${NC}\n" "$dir"
+  printf "${GRAY}Root Directory: %s${NC}\n" "$path"
+  printf "${GRAY}Install Directory: %s${NC}\n" "$site_dir"
 
   # Make directory
   util::make_dir "$name" "$dir"
