@@ -5,7 +5,8 @@
 # Cog
 # Author: Troy McGinnis
 # Company: Gearbox
-# Updated: November 19, 2017
+# URI: https://gearboxbuilt.com
+# Updated: January 20, 2018
 #
 #
 NAME='cog'
