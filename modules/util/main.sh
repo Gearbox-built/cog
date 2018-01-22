@@ -58,6 +58,8 @@ util::make_dir() {
         printf "\n${RED}Site already exists!${NC} Maybe try another directory?"
         printf "\n--------------------------------------------------------\n"
         exit_cog
+      elif [[ "$3" -eq true ]]; then
+        cd "$1" && mkdir "$2"
       fi
   else
     mkdir "$1"

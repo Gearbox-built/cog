@@ -52,6 +52,8 @@ wp::wp_install() {
   message "Installing WP..."
   wp core download
   wp config create --dbname="$name" --dbuser="$db_user" --dbpass="$db_pass"
+
+  cd - > /dev/null || exit
 }
 
 

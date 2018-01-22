@@ -97,18 +97,18 @@ create::wp() {
   printf "${GRAY}Plugin Directory: %s${NC}\n" "$plugin_dir"
   printf "${GRAY}Theme Directory: %s${NC}\n" "$theme_dir"
 
-  # Make directory
-  util::make_dir "$name" "$dir"
-
   # Bedrock? Or default?
   if [[ -n "$bedrock" ]]; then
-    # Setup Bedrock
+    # Make directory
+    util::make_dir "$name" "$dir"
     wp::bedrock_setup --dir="$site_dir" --name="$name" --url="$url"
     install_url="${install_url}/wp/"
   elif [[ -n "$pantheon" ]]; then
+    util::make_dir "$name" "$dir"
     pantheon::wp_install --dir="$site_dir" --name="$name" --url="$url"
   else
-    wp::wp_install "$@"
+    util::make_dir "$name" "$dir" true
+    wp::wp_install "$@" --dir="$site_dir"
   fi
 
   cd "$site_dir" || exit
