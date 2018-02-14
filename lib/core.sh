@@ -9,13 +9,20 @@
 #
 # * 2018-02-13 - First Creation
 #
+# TODO:
+# - build out module methods
+# - build out lib methods
+# - update all modules to use module_expose()
+# - update all params parsing to use params_require()
+# - update all newly created/passed variables to use params_merge()
+#
 # ##################################################
 #
 
 # Check Requirement
 # Performs a basic check on a binary to see if it is accessible or not
 #
-# @arg $1 Binary to check (eg. npm)
+# @arg string $1 Binary to check (eg. npm)
 #
 cog::check_requirement() {
   if [[ -z "$1" ]]; then
@@ -27,13 +34,14 @@ cog::check_requirement() {
   fi
 }
 
+
 # Modules
 # ##################################################
 
 # Install Module
 # Installs an existing cog module
 #
-# @arg --name Name of the module
+# @arg string --name Name of the module
 #
 cog::module_install() {
   message "Installing ${name}..."
@@ -42,10 +50,36 @@ cog::module_install() {
 # New Module
 # Creates a new cog module
 #
-# @arg --name Name of the module
+# @arg string --name Name of the module
 #
 cog::module_new() {
   message "Creating new module..."
+}
+
+# Expose Module Methods
+#
+# @arg array $1 Name of methods to expose
+#
+cog::module_expose() {
+  message "Nothing to see here..."
+
+  # case "$1" in
+  #   -v|--version)
+  #     echo "$ROOTS_MODULE_VERSION"
+  #     exit_cog
+  #     ;;
+  #   *)
+  #     local lib; lib="${module}::${1}::main"
+
+  #     if [[ $(type -t "$lib") == 'function' ]]; then
+  #       "$lib" "${@:2}"
+  #       exit_cog
+  #     else
+  #       usage "cog roots" "sage"
+  #       exit_cog
+  #     fi
+  #     ;;
+  # esac
 }
 
 # New Lib
@@ -57,6 +91,24 @@ cog::module_new() {
 cog::lib_new() {
   message "Creating new lib..."
 }
+
+# Expose Module Library Methods
+#
+# @arg array $1 Name of methods to expose
+#
+cog::lib_expose() {
+  message "Nothing to see here..."
+
+  # case "$1" in
+  #   install)
+  #     roots::sage::install "${@:2}"
+  #     ;;
+  #   *)
+  #     usage "cog roots sage" "install"
+  #     exit_cog
+  # esac
+}
+
 
 # Parameters
 # ##################################################

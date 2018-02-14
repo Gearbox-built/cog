@@ -24,6 +24,7 @@ roots::main() {
   roots::requirements
   local module; module=$( basename "$( dirname "${BASH_SOURCE[0]}")")
 
+  # TODO: Update this to use cog::module_expose()
   case "$1" in
     -v|--version)
       echo "$ROOTS_MODULE_VERSION"

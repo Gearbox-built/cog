@@ -6,22 +6,15 @@
 # Author: Troy McGinnis
 # Company: Gearbox
 # URI: https://gearboxbuilt.com
-# Updated: January 20, 2018
+# Updated: February 13, 2018
 #
 #
 NAME='cog'
-VERSION="0.2.0"
+VERSION="1.0.0"
 #
 # HISTORY:
 #
-# * 2017-11-19 - v0.2.0 - Cog refactor
-# * 2017-07-21 - v0.1.5 - Pantheon module started
-# * 2017-01-24 - v0.1.4 - Push/pull added
-# * 2017-01-19 - v0.1.3 - Static create added
-# * 2016-11-15 - v0.1.2 - Bitbucket module added
-# * 2016-10-31 - v0.1.1 - Server deploy module
-# * 2016-09-19 - v0.1.0 - Major updates
-# * 2016-04-22 - v0.0.1 - History tracking
+# * 2018-02-13 - v1.0.0 - Cog refactor
 #
 # ##################################################
 
