@@ -6,21 +6,6 @@
 # Updated: July 23, 2017
 #
 
-# - Check Requirement
-# = Performs a basic check on a binary to see if it is accessible or not
-#
-# @arg $1 Binary to check (eg. npm)
-#
-util::check_requirement() {
-  if [[ -z "$1" ]]; then
-    error "Please provide a binary to check."
-  fi
-
-  if [[ "$(which "${1}")" == "" ]]; then
-    error "Please ensure ${YELLOW}${1}${NC} is installed before continuing."
-  fi
-}
-
 util::random_key() {
   if [[ $# -ge 1 ]]; then
     for i in "$@"
@@ -187,7 +172,7 @@ util::main() {
       shift
       ;;
     check-requirement)
-      util::check_requirement "${@:2}"
+      cog::check_requirement "${@:2}"
       shift
       ;;
     *)

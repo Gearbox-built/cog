@@ -10,6 +10,6 @@ wp::requirements() {
   local requirements; requirements=(wp composer)
 
   for i in "${requirements[@]}"; do
-    util::check_requirement "${i}"
+    cog::check_requirement "${i}"
   done
 }

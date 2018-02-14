@@ -1,46 +1,32 @@
 #!/bin/bash
 #
-# Cog Sample Module
+# Cog Roots Module
 # Author: Troy McGinnis
 # Company: Gearbox
-# Updated: November 19, 2017
+# Updated: February 13, 2018
 #
-SAMPLE_MODULE_VERSION="0.0.1"
+ROOTS_MODULE_VERSION="0.0.1"
 #
 # HISTORY:
 #
-# * 2018-02-13 - v0.0.2 - Added version number
-# * 2017-11-19 - v0.0.1 - First Creation
+# * 2018-02-13 - v0.0.1 - First creation
 #
 # ##################################################
 #
 source_lib "${BASH_SOURCE[0]}" # optional
 #
 
-sample::task() {
-  echo "Do things"
-}
-
-sample::another-task() {
-  echo "Do other things"
-}
-
 #
 # Module main
 # --------------------------------------------------
 
-sample::main() {
+roots::main() {
+  roots::requirements
   local module; module=$( basename "$( dirname "${BASH_SOURCE[0]}")")
 
   case "$1" in
-    task)
-      project::push "${@:2}"
-      ;;
-    another-task)
-      project::pull "${@:2}"
-      ;;
     -v|--version)
-      echo "$SAMPLE_MODULE_VERSION"
+      echo "$ROOTS_MODULE_VERSION"
       exit_cog
       ;;
     *)
@@ -50,7 +36,7 @@ sample::main() {
         "$lib" "${@:2}"
         exit_cog
       else
-        usage "cog sample" "task,another-task,lib"
+        usage "cog roots" "sage"
         exit_cog
       fi
       ;;

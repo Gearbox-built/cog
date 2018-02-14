@@ -73,6 +73,7 @@ source_lib() {
 # Cog
 # --------------------------------------------------
 
+source "${SCRIPT_PATH}/lib/core.sh"
 source "${SCRIPT_PATH}/lib/updates.sh"
 source "${SCRIPT_PATH}/lib/usage.sh"
 source "${SCRIPT_PATH}/lib/messages.sh"
@@ -82,7 +83,7 @@ check_requirements() {
   local requirements; requirements=(npm yarn bower rvm)
 
   for i in "${requirements[@]}"; do
-    util::check_requirement "${i}"
+    cog::check_requirement "${i}"
   done
 }
 

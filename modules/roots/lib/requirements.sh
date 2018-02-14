@@ -1,13 +1,13 @@
 #!/bin/bash
 #
-# Pantheon Requirements
+# WP Requirements Module
 # Author: Troy McGinnis
 # Company: Gearbox
-# Updated: November 19, 2017
+# Updated: February 13, 2018
 #
 
-pantheon::requirements() {
-  local requirements; requirements=(terminus)
+roots::requirements() {
+  local requirements; requirements=(wp composer)
 
   for i in "${requirements[@]}"; do
     cog::check_requirement "${i}"

@@ -17,8 +17,8 @@ WP_MODULE_VERSION="1.0.1"
 source_lib "${BASH_SOURCE[0]}"
 #
 
-# WordPress Config
-# Updates the WordPress configuration.
+# WordPress Install
+# Downloads and installs a fresh WP instance
 #
 wp::wp_install() {
   for i in "$@"
@@ -42,6 +42,13 @@ wp::wp_install() {
     esac
   done
 
+  if [[ $# -lt 1 ]] || [[ -z "$name" ]]; then
+    local sub="install --local --name=<name>|--db=<db> [--db-user=<db-user>] [--db-pass=<db-pass>] [--db-host=<db-host>]"
+    sub="${sub},config --db=<db> --db-user=<db-user> --db-pass=<db-pass> [--db-host=<db-host>]"
+    usage "cog wp" "install, --name=<name>,[--dir=<dir>],[--db=<db>],[--db-user=<db-user>],[--db-pass=<db-pass>]" "arg"
+    exit_cog
+  fi
+
   local dir; dir=${dir:-$( pwd )}
   local db; db=${db:-$name}
   local db_user; db_user="${db_user:-root}"
@@ -54,6 +61,16 @@ wp::wp_install() {
   wp config create --dbname="$name" --dbuser="$db_user" --dbpass="$db_pass"
 
   cd - > /dev/null || exit
+}
+
+# WordPress Setup
+# Downloads, installs, and setups up a fresh WP instance
+#
+wp::wp_setup() {
+  message "Setting up WP..."
+  # 1. wp::wp_install
+  # 2. wp db create
+  # 3. wp core install
 }
 
 
@@ -222,6 +239,12 @@ wp::main() {
   local module; module=$( basename "$( dirname "${BASH_SOURCE[0]}")")
 
   case "$1" in
+    install)
+      wp::wp_install "${@:2}"
+      ;;
+    setup)
+      wp::wp_setup "${@:2}"
+      ;;
     config)
       wp::config "${@:2}"
       ;;
@@ -239,7 +262,7 @@ wp::main() {
         "$lib" "${@:2}"
         exit_cog
       else
-        usage "cog wp" "theme,bedrock,plugins"
+        usage "cog wp" "install,theme,bedrock,plugins"
         exit_cog
       fi
       ;;
