@@ -1,3 +1,0 @@
-# Cog Modules
-
-Modularity.

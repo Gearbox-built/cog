@@ -18,49 +18,76 @@ VERSION="1.0.0"
 #
 # ##################################################
 
-SCRIPT_PATH=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
-
-#
-# Source Script files
-# --------------------------------------------------
-
-# TODO: Register/track modules to provide better feedback
-source_modules() {
-
-  # Source script files
-  for module in ${SCRIPT_PATH}/modules/*; do
-
-    if [ -d "$module" ]; then
-      # source module shell script
-      source "${module}/main.sh"
-
-      # source module config
-      local module_config
-      module_config=${module}/.config
-
-      # if there's a config and it's opted to load now, source it now
-      if [ -f "$module_config" ]; then
-        if [[ $(sed -n '2{p;q;}' "$module_config") == "# config-load" ]]; then
-          source "${module}/.config"
-        fi
-      fi
-    fi
-  done
-
-  source "${SCRIPT_PATH}/.config"
-  source "${SCRIPT_PATH}/.colors"
-}
-
+MODULES=();
+COG_PATH=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
 
 #
 # Cog
 # --------------------------------------------------
 
-source "${SCRIPT_PATH}/lib/core.sh"
-source "${SCRIPT_PATH}/lib/updates.sh"
-source "${SCRIPT_PATH}/lib/usage.sh"
-source "${SCRIPT_PATH}/lib/messages.sh"
-source "${SCRIPT_PATH}/lib/modules.sh"
-source "${SCRIPT_PATH}/lib/params.sh"
+# Cog libs
+source "${COG_PATH}/lib/core.sh"
+source "${COG_PATH}/lib/updates.sh"
+source "${COG_PATH}/lib/usage.sh"
+source "${COG_PATH}/lib/messages.sh"
+source "${COG_PATH}/lib/modules.sh"
+source "${COG_PATH}/lib/params.sh"
 
+# Cog config + colors
+source "${COG_PATH}/.config"
+source "${COG_PATH}/.colors"
+
+#
+# Main
+# --------------------------------------------------
+
+cog::main() {
+  cog::source_modules
+
+  # Check requirements
+  cog::check_base_requirements
+
+  # Check for no params
+  if [[ $# -lt 1 ]]
+    then
+      cog::usage
+      cog::exit
+  fi
+
+  # Handle args and such
+  while (( $# >= 1 ))
+  do
+  key="$1"
+
+  case $key in
+    --debug)
+      DEBUG=YES
+      ;;
+    -v|--version)
+      echo $VERSION
+      exit 1
+      ;;
+    ?|-h|--help)
+      cog::usage
+      cog::exit
+      ;;
+    update|upgrade)
+      cog::update
+      exit 1
+      ;;
+    --*)
+      # Hmm...
+      ;;
+    *)
+      if [[ $(type -t "${1}::main") == 'function' ]]; then
+        "${1}::main" "${@:2}"
+        cog::exit
+      fi
+      ;;
+  esac
+  shift # past argument or value
+  done
+}
+
+# GO!
 cog::main "$@"

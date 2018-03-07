@@ -42,8 +42,38 @@ cog::check_base_requirements() {
 # Checks for updates then exits the script
 #
 cog::exit() {
-  check_for_updates
+  cog::check_for_updates
   exit 1
+}
+
+# Source Modules
+# Load all of the cog modules
+#
+# TODO: Register/track modules to provide better feedback
+cog::source_modules() {
+
+  # Source script files
+  for module_dir in ${COG_PATH}/modules/*; do
+    module=${module_dir##*/}
+
+    if [[ -d "$module_dir" && -f "${module_dir}/${module}.sh" ]]; then
+      MODULES+=("$module")
+
+      # source module shell script
+      source "${module_dir}/${module}.sh"
+
+      # source module config
+      local module_config
+      module_config=${module_dir}/.config
+
+      # if there's a config and it's opted to load now, source it now
+      if [ -f "$module_config" ]; then
+        if [[ $(sed -n '2{p;q;}' "$module_config") == "# config-load" ]]; then
+          source "${module_dir}/.config"
+        fi
+      fi
+    fi
+  done
 }
 
 # Source Lib
@@ -59,74 +89,4 @@ cog::source_lib() {
       for lib in ${lib_dir}/*; do source "$lib"; done
     fi
   fi
-}
-
-#
-# Main
-# --------------------------------------------------
-
-cog::main() {
-  source_modules
-
-  # Check requirements
-  cog::check_base_requirements
-
-  # Check for no params
-  if [[ $# -lt 1 ]]
-    then
-      cog_usage
-      cog::exit
-  fi
-
-  #
-  # Handle args and such
-  # aka: run
-  #
-  while (( $# >= 1 ))
-  do
-  key="$1"
-
-  case $key in
-    --dev)
-      DEV=YES
-      ;;
-    --debug)
-      DEBUG=YES
-      ;;
-    -v|--version)
-      echo $VERSION
-      cog::exit
-      ;;
-    ?|--help)
-      cog_usage
-      cog::exit
-      ;;
-    update|upgrade)
-      update_self
-      cog::exit
-      ;;
-    pull)
-      project::pull "${@:2}"
-      cog::exit
-      ;;
-    push)
-      project::push "${@:2}"
-      cog::exit
-      ;;
-    update)
-      project::update "${@:2}"
-      cog::exit
-      ;;
-    --*)
-      # Hmm...
-      ;;
-    *)
-      if [[ $(type -t "${1}::main") == 'function' ]]; then
-        "${1}::main" "${@:2}"
-        cog::exit
-      fi
-      ;;
-  esac
-  shift # past argument or value
-  done
 }

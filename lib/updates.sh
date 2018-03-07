@@ -14,11 +14,11 @@
 
 # Check for Updates
 #
-check_for_updates() {
+cog::check_for_updates() {
   printf "\n${BLUE}Checking for updates...${NC}\n"
 
   local git_command; local branch
-  git_command="git -C $SCRIPT_PATH"
+  git_command="git -C $COG_PATH"
   branch=$($git_command branch | sed -n '/\* /s///p')
 
   # Set upstream if not already
@@ -73,8 +73,8 @@ check_for_updates() {
 
 # Update Self
 #
-update_self() {
-  git_command="git -C $SCRIPT_PATH"
+cog::update() {
+  git_command="git -C $COG_PATH"
 
   if [[ $($git_command diff --shortstat 2> /dev/null | tail -n1) != "" ]] && echo "*"; then
     error "Git branch is dirty. Commit and push your changes please"
@@ -82,7 +82,7 @@ update_self() {
 
   printf "\n${GREEN}Getting the latest Cog...${NC}\n"
 
-  $git_command fetch --all && git -C "$SCRIPT_PATH" reset --hard origin/master
+  $git_command fetch --all && git -C "$COG_PATH" reset --hard origin/master
 
   printf "\n--------------------------------------------------------\n"
   if [ $? -ne 0 ]; then
