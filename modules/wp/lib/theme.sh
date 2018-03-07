@@ -230,6 +230,6 @@ wp::theme::main() {
       ;;
     *)
       usage "cog wp theme" "install --url=<url> [--dir=<dir>] [--dev],download [--dir=<dir>] [--dev],compile [<dir>]"
-      exit_cog
+      cog::exit
   esac
 }

@@ -14,7 +14,7 @@ SAMPLE_MODULE_VERSION="0.0.1"
 #
 # ##################################################
 #
-source_lib "${BASH_SOURCE[0]}" # optional
+cog::source_lib "${BASH_SOURCE[0]}" # optional
 #
 
 sample::task() {
@@ -41,17 +41,17 @@ sample::main() {
       ;;
     -v|--version)
       echo "$SAMPLE_MODULE_VERSION"
-      exit_cog
+      cog::exit
       ;;
     *)
       local lib; lib="${module}::${1}::main"
 
       if [[ $(type -t "$lib") == 'function' ]]; then
         "$lib" "${@:2}"
-        exit_cog
+        cog::exit
       else
         usage "cog sample" "task,another-task,lib"
-        exit_cog
+        cog::exit
       fi
       ;;
   esac

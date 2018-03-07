@@ -13,7 +13,7 @@ ROOTS_MODULE_VERSION="0.0.1"
 #
 # ##################################################
 #
-source_lib "${BASH_SOURCE[0]}" # optional
+cog::source_lib "${BASH_SOURCE[0]}" # optional
 #
 
 #
@@ -28,17 +28,17 @@ roots::main() {
   case "$1" in
     -v|--version)
       echo "$ROOTS_MODULE_VERSION"
-      exit_cog
+      cog::exit
       ;;
     *)
       local lib; lib="${module}::${1}::main"
 
       if [[ $(type -t "$lib") == 'function' ]]; then
         "$lib" "${@:2}"
-        exit_cog
+        cog::exit
       else
         usage "cog roots" "sage"
-        exit_cog
+        cog::exit
       fi
       ;;
   esac

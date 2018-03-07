@@ -42,7 +42,7 @@ util::make_dir() {
         printf "\n--------------------------------------------------------"
         printf "\n${RED}Site already exists!${NC} Maybe try another directory?"
         printf "\n--------------------------------------------------------\n"
-        exit_cog
+        cog::exit
       elif [[ "$3" -eq true ]]; then
         cd "$1" && mkdir "$2"
       fi
@@ -109,7 +109,7 @@ util::config_env() {
 
   if [[ $# -lt 1 ]]; then
     usage "cog util" "config-env, --user=<user>,--db=<db>,--db-user=<db-user>,--db-pass=<db-pass>,--url=<url>,[--ip=<ip>],[--file=<file>]" "arg"
-    exit_cog
+    cog::exit
   fi
 
   message "Configuring Env file..."
@@ -179,6 +179,6 @@ util::main() {
       local func="cog util"
       local sub="salts [--file=<file>],key [--length=<int>] [--chars=<chars>],new-env [output-path]"
       usage "$func" "$sub"
-      exit_cog
+      cog::exit
   esac
 }

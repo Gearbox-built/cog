@@ -70,7 +70,7 @@ create::wp() {
 
   if [[ $# -lt 1 || -z "$name" ]]; then
     usage "cog create" "wp, --name=<name>,[--human=<human>],[--port=<port>],[--dir=<dir>],[--url=<url>],[--email=<email>],[--dev],[--bedrock],[--pantheon]" "arg"
-    exit_cog
+    cog::exit
   fi
 
   # Variables
@@ -157,7 +157,7 @@ create::static() {
 
   if [[ $# -lt 1 || -z "$name" ]]; then
     usage "cog create" "static, --name=<name>,[--human=<human>],[--dir=<dir>]" "arg"
-    exit_cog
+    cog::exit
   fi
 
   # Variables
@@ -215,7 +215,7 @@ create::shopify() {
 
   if [[ $# -lt 1 || -z "$name" || -z "$pass" || -z "$store" ]]; then
     usage "cog create" "shopify, --name=<name>, --pass=<pass>, --store=<store>,[--human=<human>],[--dir=<dir>]" "arg"
-    exit_cog
+    cog::exit
   fi
 
   # Variables
@@ -297,7 +297,7 @@ create::main() {
       ;;
     -v|--version)
       echo $CREATE_MODULE_VERSION
-      exit_cog
+      cog::exit
       ;;
     *)
       if [[ -n "$2" ]]; then
@@ -309,7 +309,7 @@ create::main() {
         usage "cog create" "$sub"
 
         # printf "${GRAY}The wp param is actually optional.${NC}\n\n"
-        exit_cog
+        cog::exit
       fi
       ;;
   esac

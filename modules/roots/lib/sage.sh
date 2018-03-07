@@ -21,7 +21,7 @@ roots::sage::install() {
 
   if [[ $# -lt 1 || -z "$arg1" ]]; then
     usage "cog roots sage" "install, --arg1=<arg1>,[--arg2=<arg2>]" "arg"
-    exit_cog
+    cog::exit
   fi
 
   message "Setting up Roots Sage..."
@@ -45,6 +45,6 @@ roots::sage::main() {
       ;;
     *)
       usage "cog roots sage" "install"
-      exit_cog
+      cog::exit
   esac
 }

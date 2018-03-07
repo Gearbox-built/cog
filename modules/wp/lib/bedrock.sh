@@ -47,7 +47,7 @@ wp::bedrock_config() {
 
   if [[ "$#" -lt 2 || -z "$name" || -z "$url" ]]; then
     usage "cog wp bedrock" "config, --name=<name>, --url=<url>,[--dir=<dir>]" "args"
-    exit_cog
+    cog::exit
   fi
 
   local dir; dir=${dir:-$( pwd )}
@@ -86,7 +86,7 @@ wp::bedrock_setup() {
 
   if [[ "$#" -lt 2 || -z "$name" || -z "$url" ]]; then
     usage "cog wp bedrock" "setup, --name=<name>, --url=<url>,[--dir=<dir>]" "args"
-    exit_cog
+    cog::exit
   fi
 
   local dir; dir=${dir:-$( pwd )}
@@ -149,6 +149,6 @@ wp::bedrock::main() {
       sub="${sub},config --name=<name> --url=<url> [--dir=<dir>]"
       sub="${sub},setup --name=<name> --url=<url> [--dir=<dir>]"
       usage "$func" "$sub"
-      exit_cog
+      cog::exit
   esac
 }

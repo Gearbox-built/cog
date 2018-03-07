@@ -24,7 +24,7 @@ server::account_create() {
 
   if [[ $# -lt 2 || -z "$user" || -z "$domain" ]]; then
     usage "cog server account" "create,--user=<user>,--domain=<domain>" "arg"
-    exit_cog
+    cog::exit
   fi
 
   local result
@@ -53,7 +53,7 @@ server::account_setup() {
 
   if [[ $# -lt 2 || -z "$user" || -z "$domain" ]]; then
     usage "cog server account" "setup, --user=<user>, --domain=<domain>,[--name=<db-name>],[--db-user=<db-user>]" "arg"
-    exit_cog
+    cog::exit
   fi
 
   server::account_create "$@"
@@ -75,6 +75,6 @@ server::account::main() {
       ;;
     *)
       usage "cog server account" "create --user=<user> --domain=<domain>,setup --user=<user> --domain=<domain> [--name=<db-name>] [--db-user=<db-user>]"
-      exit_cog
+      cog::exit
   esac
 }

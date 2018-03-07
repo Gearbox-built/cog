@@ -58,7 +58,7 @@ pantheon::files::pull() {
 
   if [[ "$#" -lt 1 || -z "$site" ]]; then
     usage "cog pantheon" "pull, --site=<site>,[--name=<name>],[--env=<env>]" "args"
-    exit_cog
+    cog::exit
   fi
 
   local env; env=${env:-dev}
@@ -101,6 +101,6 @@ pantheon::files::main() {
       ;;
     *)
       usage "cog pantheon files" "pull,push"
-      exit_cog
+      cog::exit
   esac
 }

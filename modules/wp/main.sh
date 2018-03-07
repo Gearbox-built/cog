@@ -14,7 +14,7 @@ WP_MODULE_VERSION="1.0.1"
 #
 # ##################################################
 #
-source_lib "${BASH_SOURCE[0]}"
+cog::source_lib "${BASH_SOURCE[0]}"
 #
 
 # WordPress Install
@@ -46,7 +46,7 @@ wp::wp_install() {
     local sub="install --local --name=<name>|--db=<db> [--db-user=<db-user>] [--db-pass=<db-pass>] [--db-host=<db-host>]"
     sub="${sub},config --db=<db> --db-user=<db-user> --db-pass=<db-pass> [--db-host=<db-host>]"
     usage "cog wp" "install, --name=<name>,[--dir=<dir>],[--db=<db>],[--db-user=<db-user>],[--db-pass=<db-pass>]" "arg"
-    exit_cog
+    cog::exit
   fi
 
   local dir; dir=${dir:-$( pwd )}
@@ -118,7 +118,7 @@ wp::config() {
       local sub="config --local --name=<name>|--db=<db> [--db-user=<db-user>] [--db-pass=<db-pass>] [--db-host=<db-host>]"
       sub="${sub},config --db=<db> --db-user=<db-user> --db-pass=<db-pass> [--db-host=<db-host>]"
       usage "cog wp" "$sub"
-      exit_cog
+      cog::exit
     fi
 
     local output=${output:-wp-config-local.php}
@@ -129,7 +129,7 @@ wp::config() {
     if [[ $# -lt 4 || -z "$db" || -z "$db_user" || -z "$db_pass" || -z "$db_host" ]]; then
       usage "cog wp" "config, --local, --name=<name>|--db=<db>,[--db-user=<db-user>],[--db-pass=<db-pass>],[--db-host=<db-host>]" "arg"
       usage "cog wp" "config, --db=<db> , --db-user=<db-user>, --db-pass=<db-pass>,[--db-host=<db-host>]" "arg"
-      exit_cog
+      cog::exit
     fi
   fi
 
@@ -253,17 +253,17 @@ wp::main() {
       ;;
     -v|--version)
       echo $WP_MODULE_VERSION
-      exit_cog
+      cog::exit
       ;;
     *)
       local lib; lib="${module}::${1}::main"
 
       if [[ $(type -t "$lib") == 'function' ]]; then
         "$lib" "${@:2}"
-        exit_cog
+        cog::exit
       else
         usage "cog wp" "install,theme,bedrock,plugins"
-        exit_cog
+        cog::exit
       fi
       ;;
   esac

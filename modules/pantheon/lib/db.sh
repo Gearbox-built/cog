@@ -21,7 +21,7 @@ pantheon::db::pull() {
 
   if [[ "$#" -lt 1 || -z "$site" ]]; then
     usage "cog pantheon db" "pull, --site=<site>,[--name=<name>],[--env=<env>]" "args"
-    exit_cog
+    cog::exit
   fi
 
   local env; env=${env:-dev}
@@ -63,6 +63,6 @@ pantheon::db::main() {
       ;;
     *)
       usage "cog pantheon db" "pull"
-      exit_cog
+      cog::exit
   esac
 }

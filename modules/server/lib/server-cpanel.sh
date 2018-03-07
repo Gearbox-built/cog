@@ -21,7 +21,7 @@ server::cpanel() {
 
 server::cpanel_mysql() {
   if [[ $# -lt 2 ]]; then
-    echo 'DO IT RIGHT.'; exit_cog
+    echo 'DO IT RIGHT.'; cog::exit
   fi
 
   server::cpanel "--user=${1} Mysql ${2}"

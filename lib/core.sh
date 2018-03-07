@@ -3,18 +3,11 @@
 # Cog Core Functions
 # Author: Troy McGinnis
 # Company: Gearbox
-# Updated: February 13, 2018
+# Updated: March 6, 2018
 #
 # HISTORY:
 #
 # * 2018-02-13 - First Creation
-#
-# TODO:
-# - build out module methods
-# - build out lib methods
-# - update all modules to use module_expose()
-# - update all params parsing to use params_require()
-# - update all newly created/passed variables to use params_merge()
 #
 # ##################################################
 #
@@ -34,101 +27,106 @@ cog::check_requirement() {
   fi
 }
 
-
-# Modules
-# ##################################################
-
-# Install Module
-# Installs an existing cog module
+# Check Base Cog Requirements
+# Performs a check on cog's basic needs
 #
-# @arg string --name Name of the module
-#
-cog::module_install() {
-  message "Installing ${name}..."
+cog::check_base_requirements() {
+  local requirements; requirements=(npm yarn bower rvm)
+
+  for i in "${requirements[@]}"; do
+    cog::check_requirement "${i}"
+  done
 }
 
-# New Module
-# Creates a new cog module
+# Exit
+# Checks for updates then exits the script
 #
-# @arg string --name Name of the module
-#
-cog::module_new() {
-  message "Creating new module..."
+cog::exit() {
+  check_for_updates
+  exit 1
 }
 
-# Expose Module Methods
+# Source Lib
+# Batch source module lib bash files
 #
-# @arg array $1 Name of methods to expose
+# @arg string $1 Directory to source bash files
 #
-cog::module_expose() {
-  message "Nothing to see here..."
+cog::source_lib() {
+  if [[ -n "$1" && -f "$1" ]]; then
+    local lib; local lib_dir; lib_dir="$( cd "$( dirname "${1}" )" && pwd )/lib"
 
-  # case "$1" in
-  #   -v|--version)
-  #     echo "$ROOTS_MODULE_VERSION"
-  #     exit_cog
-  #     ;;
-  #   *)
-  #     local lib; lib="${module}::${1}::main"
-
-  #     if [[ $(type -t "$lib") == 'function' ]]; then
-  #       "$lib" "${@:2}"
-  #       exit_cog
-  #     else
-  #       usage "cog roots" "sage"
-  #       exit_cog
-  #     fi
-  #     ;;
-  # esac
+    if [[ -d $lib_dir ]]; then
+      for lib in ${lib_dir}/*; do source "$lib"; done
+    fi
+  fi
 }
 
-# New Lib
-# Creates a new cog module lib
 #
-# @arg --name Name of the lib
-# @arg [--module] Name of the module
-#
-cog::lib_new() {
-  message "Creating new lib..."
-}
+# Main
+# --------------------------------------------------
 
-# Expose Module Library Methods
-#
-# @arg array $1 Name of methods to expose
-#
-cog::lib_expose() {
-  message "Nothing to see here..."
+cog::main() {
+  source_modules
 
-  # case "$1" in
-  #   install)
-  #     roots::sage::install "${@:2}"
-  #     ;;
-  #   *)
-  #     usage "cog roots sage" "install"
-  #     exit_cog
-  # esac
-}
+  # Check requirements
+  cog::check_base_requirements
 
+  # Check for no params
+  if [[ $# -lt 1 ]]
+    then
+      cog_usage
+      cog::exit
+  fi
 
-# Parameters
-# ##################################################
+  #
+  # Handle args and such
+  # aka: run
+  #
+  while (( $# >= 1 ))
+  do
+  key="$1"
 
-# Merge Parameters
-# Description
-#
-# @arg --arg Arrrrrg me mateys
-# @arg [--arg2] Optional arrrrrg
-#
-cog::params_merge() {
-  message "Nothing to see here..."
-}
-
-# Require Parameters
-# Description
-#
-# @arg --arg Arrrrrg me mateys
-# @arg [--arg2] Optional arrrrrg
-#
-cog::params_require() {
-  message "Nothing to see here..."
+  case $key in
+    --dev)
+      DEV=YES
+      ;;
+    --debug)
+      DEBUG=YES
+      ;;
+    -v|--version)
+      echo $VERSION
+      cog::exit
+      ;;
+    ?|--help)
+      cog_usage
+      cog::exit
+      ;;
+    update|upgrade)
+      update_self
+      cog::exit
+      ;;
+    pull)
+      project::pull "${@:2}"
+      cog::exit
+      ;;
+    push)
+      project::push "${@:2}"
+      cog::exit
+      ;;
+    update)
+      project::update "${@:2}"
+      cog::exit
+      ;;
+    --*)
+      # Hmm...
+      ;;
+    *)
+      if [[ $(type -t "${1}::main") == 'function' ]]; then
+        "${1}::main" "${@:2}"
+        cog::exit
+      fi
+      ;;
+  esac
+  shift # past argument or value
+  done
 }

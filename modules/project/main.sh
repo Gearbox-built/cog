@@ -34,7 +34,7 @@ project::push() {
   if [[ ! -d "../.git" ]]; then
     if [[ "$#" -lt 1 || -z "$name" ]]; then
       usage "cog [project]" "push, --name=<name>,[--dir=<dir>],[-m|--message=<message>]" "args"
-      exit_cog
+      cog::exit
     fi
   fi
 
@@ -105,12 +105,12 @@ project::pull() {
   if [[ ! $? -eq 0 ]]; then
     if [[ "$#" -lt 1 || -z "$name" ]]; then
       usage "cog [project]" "pull, --name=<name>,[--url=<url>],[--dir=<dir>],[--pull=<pull>]" "args"
-      exit_cog
+      cog::exit
     fi
   else
     # Oh. We're just updating?
     project::update
-    exit_cog
+    cog::exit
   fi
 
   # Variables

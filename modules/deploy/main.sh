@@ -5,7 +5,7 @@
 # Company: Gearbox
 # Updated: November 19, 2017
 #
-source_lib "${BASH_SOURCE[0]}"
+cog::source_lib "${BASH_SOURCE[0]}"
 #
 
 deploy::prep() {
@@ -76,7 +76,7 @@ deploy::wp() {
     message "Running gulp deploy..."
     gulp deploy
   else
-    error "Can't find your gulpfile! Please navigate to the location of your project's .env or gulpfile.js file then try again." ; exit_cog;
+    error "Can't find your gulpfile! Please navigate to the location of your project's .env or gulpfile.js file then try again." ; cog::exit;
   fi
 
   if [ $? -ne 0 ]; then
@@ -172,10 +172,10 @@ deploy::main() {
     *)
       if [[ $(type -t "${1}::lib") == 'function' ]]; then
         "${1}::lib" "${@:2}"
-        exit_cog
+        cog::exit
       else
         usage "cog deploy" "prep,db,wp"
-        exit_cog
+        cog::exit
       fi
       ;;
   esac

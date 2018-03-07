@@ -79,7 +79,7 @@ warning_check() {
   if [[ "$check" == "y" || "$check" == "Y" ]]; then
     return 0
   else
-    exit_cog
+    cog::exit
   fi
 }
 
@@ -96,7 +96,7 @@ error() {
     printf "\n${RED}Error:${NC} ${1} Exiting.\n\n"
 
     if [[ -z "$2" || "$2" != false ]]; then
-      exit_cog
+      cog::exit
     fi
   fi
 }

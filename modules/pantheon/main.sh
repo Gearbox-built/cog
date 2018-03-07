@@ -14,7 +14,7 @@ PANTHEON_MODULE_VERSION="1.01"
 #
 # ##################################################
 #
-source_lib "${BASH_SOURCE[0]}"
+cog::source_lib "${BASH_SOURCE[0]}"
 #
 
 # WordPress Install
@@ -38,7 +38,7 @@ pantheon::wp_install() {
 
   if [[ "$#" -lt 2 || -z "$name" || -z "$url" ]]; then
     usage "cog pantheon" "wp-install, --name=<name>, --url=<url>,[--dir=<dir>]" "args"
-    exit_cog
+    cog::exit
   fi
 
   local dir; dir=${dir:-$( pwd )}
@@ -135,17 +135,17 @@ pantheon::main() {
       ;;
     -v|--version)
       echo $PANTHEON_MODULE_VERSION
-      exit_cog
+      cog::exit
       ;;
     *)
       local lib; lib="${module}::${1}::main"
 
       if [[ $(type -t "$lib") == 'function' ]]; then
         "$lib" "${@:2}"
-        exit_cog
+        cog::exit
       else
         usage "cog pantheon" "create,push,pull,db,files"
-        exit_cog
+        cog::exit
       fi
       ;;
   esac

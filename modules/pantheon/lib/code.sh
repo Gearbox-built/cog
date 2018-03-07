@@ -28,6 +28,6 @@ pantheon::code::main() {
       ;;
     *)
       usage "cog pantheon code" "pull,push"
-      exit_cog
+      cog::exit
   esac
 }

@@ -5,7 +5,7 @@
 # Company: Gearbox
 # Updated: September 18, 2016
 #
-source_lib "${BASH_SOURCE[0]}"
+cog::source_lib "${BASH_SOURCE[0]}"
 #
 
 server::login() {
@@ -46,10 +46,10 @@ server::main() {
 
       if [[ $(type -t "$lib") == 'function' ]]; then
         "$lib" "${@:2}"
-        exit_cog
+        cog::exit
       else
         usage "cog server" "login,ssh,account,db"
-        exit_cog
+        cog::exit
       fi
       ;;
   esac

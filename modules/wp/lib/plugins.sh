@@ -48,7 +48,7 @@ wp::plugins::main() {
       ;;
     *)
       usage "cog wp plugins install" "activate"
-      exit_cog
+      cog::exit
       ;;
   esac
 }

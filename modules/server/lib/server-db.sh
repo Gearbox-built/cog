@@ -21,7 +21,7 @@ server::db_create() {
 
   if [[ $# -lt 1 || -z "$user" ]]; then
     usage "cog server db" "create, --user=<user>,[--name=<name>]" "arg"
-    exit_cog
+    cog::exit
   fi
 
   # Truncate user if db name isn't passed in
@@ -34,7 +34,7 @@ server::db_create() {
     success "Created database ${YELLOW}${name}${NC}"
   else
     echo "$result"
-    exit_cog
+    cog::exit
   fi
 }
 
@@ -56,7 +56,7 @@ server::db_create_user() {
 
   if [[ $# -lt 1 || -z "$user" ]]; then
     usage "cog server db" "create-user, --user=<user>,[--db-user=<db-user>],[--pass=<pass>]" "arg"
-    exit_cog
+    cog::exit
   fi
 
   # Truncate user if db name isn't passed in
@@ -78,7 +78,7 @@ server::db_create_user() {
     printf "${GRAY}DB User:${NC} %s\n" "${name}"
     printf "${GRAY}DB Password:${NC} %s" "${pass}"
     printf "\n--------------------------------------------------------\n\n"
-    exit_cog
+    cog::exit
   fi
 }
 
@@ -103,7 +103,7 @@ server::db_set_privileges() {
 
   if [[ $# -lt 1 || -z "$user" ]]; then
     usage "cog server db" "set-priviledges, --user=<user>,[--db-user=<db-user>],[--name=<name>],[--privileges=<privileges>]" "arg"
-    exit_cog
+    cog::exit
   fi
 
   # Truncate user if db name isn't passed in
@@ -118,14 +118,14 @@ server::db_set_privileges() {
     success "Set database privileges on ${name} for ${db_user} with ${privileges}"
   else
     echo "$result"
-    exit_cog
+    cog::exit
   fi
 }
 
 server::db_setup() {
   if [[ $# -lt 1 ]]; then
     usage "cog server db" "setup, --user=<user>,[--name=<db-name>],[--db-user=<db-user>]" "arg"
-    exit_cog
+    cog::exit
   fi
 
   server::db_create "$@"
@@ -159,6 +159,6 @@ server::db::main() {
       sub="${sub},db set-privileges --user=<user> [--db-user=<db-user>] [--name=<name>] [--privileges=<privileges>]"
       sub="${sub},db setup --user=<user> [--name=<db-name>] [--db-user=<db-user>]"
       usage "$func" "$sub"
-      exit_cog
+      cog::exit
   esac
 }

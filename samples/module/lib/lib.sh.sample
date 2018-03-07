@@ -25,7 +25,7 @@ sample::lib_another-task() {
 
   if [[ $# -lt 1 || -z "$arg1" ]]; then
     usage "cog sample sample-lib" "lib-task, --arg1=<arg1>,[--arg2=<arg2>]" "arg"
-    exit_cog
+    cog::exit
   fi
 
   echo "More lib"
@@ -48,6 +48,6 @@ sample::lib::main() {
       ;;
     *)
       usage "cog sample lib" "lib-task,lib-another-task --arg1=<arg1> [--arg2=<arg2>]"
-      exit_cog
+      cog::exit
   esac
 }
