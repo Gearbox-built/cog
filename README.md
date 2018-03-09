@@ -20,7 +20,7 @@ echo "alias cog='bash ~/scripts/gearbox-cog/cog.sh'" >> ~/.bash_profile && sourc
 
 ## Modules
 
-See example module format.
+See [example module format](modules).
 
 ## Parameters
 
