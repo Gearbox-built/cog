@@ -18,6 +18,10 @@ Run the following to setup your `cog` alias:
 echo "alias cog='bash ~/scripts/gearbox-cog/cog.sh'" >> ~/.bash_profile && source ~/.bash_profile
 ```
 
+## Modules
+
+See example module format.
+
 ## Parameters
 
 *The rest coming soon...*
