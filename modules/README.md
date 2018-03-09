@@ -1,3 +1,5 @@
+## Example Module format
+
 ```sh
 #!/bin/bash
 #
