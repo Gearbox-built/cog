@@ -1,0 +1,19 @@
+{
+  "name": "cog",
+  "version": "1.0.0",
+  "description": "Cogcogcog",
+  "global": "false",
+  "scripts": [
+    "cog.sh",
+    "lib/core.sh",
+    "lib/messages.sh",
+    "lib/modules.sh",
+    "lib/params.sh",
+    "lib/updates.sh",
+    "lib/usage.sh"
+  ],
+  "files": [
+    ".colors",
+    ".config"
+  ]
+}

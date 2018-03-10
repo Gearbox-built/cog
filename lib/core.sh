@@ -42,7 +42,9 @@ cog::check_base_requirements() {
 # Checks for updates then exits the script
 #
 cog::exit() {
-  cog::check_for_updates
+  if [[ -n "$CHECK_UPDATES" ]]; then
+    cog::check_for_updates
+  fi
   exit 1
 }
 
@@ -53,11 +55,11 @@ cog::exit() {
 cog::source_modules() {
 
   # Source script files
-  for module_dir in ${COG_PATH}/modules/*; do
+  for module_dir in ${COG_PATH}/deps/*; do
     module=${module_dir##*/}
 
     if [[ -d "$module_dir" && -f "${module_dir}/${module}.sh" ]]; then
-      MODULES+=("$module")
+      MODULES+=("${module//cog-}")
 
       # source module shell script
       source "${module_dir}/${module}.sh"

@@ -1,4 +1,5 @@
 # Git ignore
-modules/**/*
+deps/
+deps/*
 logs/
 logs/*

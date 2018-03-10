@@ -41,7 +41,7 @@ source "${COG_PATH}/.colors"
 # Main
 # --------------------------------------------------
 
-cog::main() {
+cog() {
   cog::source_modules
 
   # Check requirements
@@ -90,4 +90,4 @@ cog::main() {
 }
 
 # GO!
-cog::main "$@"
+cog "$@"
