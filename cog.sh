@@ -63,7 +63,16 @@ cog() {
     --debug)
       DEBUG=YES
       ;;
-    -v|--version)
+    -v)
+      VERBOSE=1
+      ;;
+    -vv)
+      VERBOSE=2
+      ;;
+    -vvv)
+      VERBOSE=3
+      ;;
+    --version)
       echo $VERSION
       exit 1
       ;;

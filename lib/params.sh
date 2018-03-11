@@ -39,6 +39,7 @@ cog::params_require() {
 
 # Params
 # An easier way to take in parameters
+# NOTE: Hypens are converted to underscores for variable names
 #
 # @arg $1 Array of arguments
 #
@@ -58,9 +59,13 @@ cog::params() {
   # Loop the provided params
   for i in "${cases[@]}"
   do
-    case="${case}--${i}=*) ${i}=\"\${i#*=}\";; "
+    case="${case}--${i}=*) ${i/-/_}=\"\${i#*=}\";; "
   done
   case="${case}esac"
+
+  if [[ $VERBOSE == 3 ]]; then
+    echo "$case"
+  fi
 
   # Extract those params
   for i in "$@"
