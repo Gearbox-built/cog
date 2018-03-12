@@ -115,6 +115,30 @@ header() {
   fi
 }
 
+# Debug Header
+#
+# @arg    string $1 Header to display
+# @return string Message
+#
+debug_header() {
+  if [[ -n "$1" ]]; then
+    printf "\n--------------------------------------------------------"
+    printf "\n${YELLOW}%s${NC}" "$1"
+    printf "\n--------------------------------------------------------\n"
+  fi
+}
+
+# Debug Message
+#
+# @arg    string $1 Message to display
+# @return string Message
+#
+debug() {
+  if [[ -n "$1" ]]; then
+    printf "${GRAY}%s:${NC} %s\n" "$1" "$2"
+  fi
+}
+
 # Standard Message
 #
 # @arg    string $1 Message to display
