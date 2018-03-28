@@ -41,7 +41,7 @@ cog::params_require() {
 
   local optional; optional=()
   local required; required=($1)
-  local required_num; required_num=${#required[@]}
+  # local required_num; required_num=${#required[@]}
   local function_name; function_name="${FUNCNAME[1]}"
 
   if [[ -n "$2" ]]; then
@@ -67,9 +67,9 @@ cog::params_require() {
   do
     ((count++))
     if [[ $count -eq total ]]; then
-      function_usage="${function_usage}\" \"${i}"
+      function_usage="${function_usage}\" \"${i/_/-}"
     else
-      function_usage="${function_usage} ${i}"
+      function_usage="${function_usage} ${i/_/-}"
     fi
   done
 
@@ -87,12 +87,17 @@ cog::params_require() {
   function_usage="${function_usage}\" \"args\""
 
   # Check
-  local required_check; required_check="if [[ \"\$#\" -lt $required_num "
-  for i in "${required[@]}"
+  # local required_check; required_check="if [[ \"\$#\" -lt $required_num "
+  local required_check; required_check="if [[ "
+  for i in "${!required[@]}"
   do
-    required_check="${required_check} || -z \"\$${i}\""
+    if [[ "$i" == 0 ]]; then
+      required_check="${required_check}-z \"\$${required[$i]/-/_}\""
+    else
+      required_check="${required_check} || -z \"\$${required[$i]/-/_}\""
+    fi
   done
-  required_check="${required_check} ]]; then ${function_usage}; fi"
+  required_check="${required_check} ]]; then ${function_usage}; cog::exit; fi"
 
   if [[ $VERBOSE == 3 ]]; then
     debug 'required check' "$required_check"
@@ -127,7 +132,7 @@ cog::params() {
     esac
   done
 
-  if [[ -z "$optional" ]]; then
+  if [[ -z "$optional" && -z "$required" ]]; then
     error "cog::params error: Missing params."
     cog::exit
   fi
