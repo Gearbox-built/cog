@@ -3,7 +3,7 @@
 # Cog Messages
 # Author: Troy McGinnis
 # Company: Gearbox
-# Updated: November 19, 2017
+# Updated: March 27, 2017
 #
 # HISTORY:
 #
@@ -48,6 +48,11 @@ usage() {
 
   # New line
   echo
+}
+
+libs() {
+  printf "\n${WHITE}Libs:${NC}\n"
+  cog::list_libs "${BASH_SOURCE[1]}"
 }
 
 # Warning Message

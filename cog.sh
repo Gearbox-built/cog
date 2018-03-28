@@ -18,7 +18,7 @@ VERSION="1.0.0"
 #
 # ##################################################
 
-MODULES=();
+MODULES=()
 COG_PATH=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
 
 #

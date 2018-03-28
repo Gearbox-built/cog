@@ -3,7 +3,7 @@
 # Cog Core Functions
 # Author: Troy McGinnis
 # Company: Gearbox
-# Updated: March 6, 2018
+# Updated: March 27, 2018
 #
 # HISTORY:
 #
@@ -84,11 +84,36 @@ cog::source_modules() {
 # @arg string $1 Directory to source bash files
 #
 cog::source_lib() {
-  if [[ -n "$1" && -f "$1" ]]; then
-    local lib; local lib_dir; lib_dir="$( cd "$( dirname "${1}" )" && pwd )/lib"
+  local file; file=${1:-${BASH_SOURCE[1]}}
+
+  if [[ -n "$file" && -f "$file" ]]; then
+    local lib; local lib_dir; lib_dir="$( cd "$( dirname "${file}" )" && pwd )/lib"
 
     if [[ -d $lib_dir ]]; then
       for lib in ${lib_dir}/*; do source "$lib"; done
+    fi
+  fi
+}
+
+# List Libs
+# List all the libs for a module
+#
+# @arg string $1 Directory to find lib files
+#
+cog::list_libs() {
+  local file; file=${1:-${BASH_SOURCE[1]}}
+
+  if [[ -n "$file" && -f "$file" ]]; then
+    local lib; local lib_dir; lib_dir="$( cd "$( dirname "${file}" )" && pwd )/lib"
+
+    if [[ -d $lib_dir ]]; then
+      for lib in ${lib_dir}/*;
+      do
+        lib_name=$(echo "${lib##*/}" | cut -f 1 -d '.')
+        if [[ "$lib_name" != 'requirements' ]]; then
+          echo "$lib_name"
+        fi
+      done
     fi
   fi
 }
