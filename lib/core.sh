@@ -3,7 +3,7 @@
 # Cog Core Functions
 # Author: Troy McGinnis
 # Company: Gearbox
-# Updated: March 27, 2018
+# Updated: April 4, 2018
 #
 # HISTORY:
 #
@@ -31,7 +31,7 @@ cog::check_requirement() {
 # Performs a check on cog's basic needs
 #
 cog::check_base_requirements() {
-  local requirements; requirements=(npm yarn bower rvm)
+  local requirements; requirements=(npm yarn bower rvm bpkg)
 
   for i in "${requirements[@]}"; do
     cog::check_requirement "${i}"
