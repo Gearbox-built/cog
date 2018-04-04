@@ -31,7 +31,7 @@ cog::check_requirement() {
 # Performs a check on cog's basic needs
 #
 cog::check_base_requirements() {
-  local requirements; requirements=(npm yarn bower rvm bpkg)
+  local requirements; requirements=(rvm bpkg)
 
   for i in "${requirements[@]}"; do
     cog::check_requirement "${i}"
