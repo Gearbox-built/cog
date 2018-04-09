@@ -116,7 +116,7 @@ cog::params_require() {
 #
 cog::params() {
   if [[ $VERBOSE == 3 ]]; then
-    debug_header "${FUNCNAME[0]}"
+    debug_header "${FUNCNAME[1]}"
     debug "params" "$@"
   fi
 
