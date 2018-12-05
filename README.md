@@ -26,7 +26,7 @@ echo "alias cog='bash ~/scripts/gearbox-cog/cog.sh'" >> ~/.bash_profile && sourc
 
 `cog <command>`
 
-### Updating `cog`
+### Updating `cog`:
 
 `cog update`
 
