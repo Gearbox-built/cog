@@ -8,7 +8,7 @@ Script to automate lots of bash stuff
 
 ### 1. Install/Update requirements
 
-- rvm - `rvm get head`
+- bpkg - https://github.com/bpkg/bpkg
 
 ### 2. Setup bash alias
 
