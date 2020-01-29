@@ -6,8 +6,6 @@ Script to automate lots of bash stuff
 
 ## Prerequisites
 
-### 1. Install/Update requirements
-
 - bpkg - https://github.com/bpkg/bpkg
 
 ## Installing Cog
