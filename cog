@@ -6,20 +6,21 @@
 # Author: Troy McGinnis
 # Company: Gearbox
 # URI: https://gearboxbuilt.com
-# Updated: March 6, 2018
+# Updated: January 29, 2020
 #
 #
 NAME='cog'
-VERSION="1.0.0"
+VERSION="1.0.1"
 #
 # HISTORY:
 #
 # * 2018-02-13 - v1.0.0 - Cog refactor
+# * 2020-01-29 - v1.0.1 - Cog installer, dropped .sh
 #
 # ##################################################
 
 MODULES=()
-COG_PATH=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
+COG_PATH=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 #
 # Cog
@@ -48,18 +49,16 @@ cog() {
   cog::check_base_requirements
 
   # Check for no params
-  if [[ $# -lt 1 ]]
-    then
-      cog::usage
-      cog::exit
+  if [[ $# -lt 1 ]]; then
+    cog::usage
+    cog::exit
   fi
 
   # Handle args and such
-  while (( $# >= 1 ))
-  do
-  key="$1"
+  while (($# >= 1)); do
+    key="$1"
 
-  case $key in
+    case $key in
     --debug)
       DEBUG=YES
       ;;
@@ -72,15 +71,15 @@ cog() {
     -vvv)
       VERBOSE=3
       ;;
-    --version)
+    -V | --version)
       echo $VERSION
       exit 1
       ;;
-    ?|-h|--help)
+    ? | -h | --help)
       cog::usage
       cog::exit
       ;;
-    update|upgrade)
+    update | upgrade)
       cog::update
       exit 1
       ;;
@@ -93,8 +92,8 @@ cog() {
         cog::exit
       fi
       ;;
-  esac
-  shift # past argument or value
+    esac
+    shift # past argument or value
   done
 }
 
