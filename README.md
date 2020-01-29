@@ -10,17 +10,15 @@ Script to automate lots of bash stuff
 
 - bpkg - https://github.com/bpkg/bpkg
 
-### 2. Setup bash alias
-
-Run the following to setup your `cog` alias:
+## Installing Cog
 
 ```sh
-echo "alias cog='bash ~/scripts/gearbox-cog/cog.sh'" >> ~/.bash_profile && source ~/.bash_profile
+curl -o- -L https://raw.githubusercontent.com/gearbox-built/cog/master/install.sh | bash
 ```
 
 ## Parameters
 
-*The rest coming soon...*
+*The rest coming...*
 
 ### Usage:
 
