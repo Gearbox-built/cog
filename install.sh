@@ -1,6 +1,7 @@
 #!/bin/bash
 # Cogcogcog
 # Source: https://github.com/gearbox-built/cog/install.sh
+#
 
 set -e
 
@@ -38,7 +39,7 @@ cog_get_tarball() {
     temp=$(mktemp -d cog.XXXXXXXXXX)
     tar zxf $tarball_tmp -C "$temp"
     mkdir .cog
-    mv "$temp"/*/* .cog
+    mv "$temp"/*/{*,.[^.]*} .cog
     rm -rf "$temp"
     rm $tarball_tmp*
   else
@@ -94,8 +95,6 @@ cog_link() {
   COG_PROFILE="$(cog_detect_profile)"
   SOURCE_STR="\nexport PATH=\"\$HOME/.cog:\$PATH\"\n"
 
-  echo $COG_PROFILE
-
   if [ -z "${COG_PROFILE-}" ]; then
     printf "${RED}> Profile not found. Tried ${COG_PROFILE} (as defined in \$PROFILE), ~/.bashrc, ~/.bash_profile, ~/.zshrc, and ~/.profile.\n"
     echo "> Create one of them and run this script again"
@@ -117,12 +116,7 @@ cog_link() {
       printf "   $SOURCE_STR${NC}\n"
     fi
 
-    version=$($HOME/.cog/cog --version) || (
-      printf "${RED}> Cog was installed, but doesn't seem to be working :(.${NC}\n"
-      exit 1
-    )
-
-    printf "${GREEN}> Successfully installed Cog $version! Please open another terminal where the \`cog\` command will now be available.${NC}\n"
+    printf "${GREEN}> Successfully installed Cog! Please open another terminal where the \`cog\` command will now be available.${NC}\n"
   fi
 }
 
