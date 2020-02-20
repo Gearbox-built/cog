@@ -1,4 +1,4 @@
-## • Modules
+## ⚙️ Modules
 
 Example module format.
 
