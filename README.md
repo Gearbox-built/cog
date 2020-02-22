@@ -30,7 +30,7 @@ git clone git@github.com:gearbox-built/cog.git cog-dev
 ```
 
 ### 2. Verify Script
-```sh
+```console
 cd cog-dev
 ./cog
 
