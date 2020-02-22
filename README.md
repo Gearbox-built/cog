@@ -1,4 +1,4 @@
-# ⚙️ Cog
+# cog
 
 Modular shell script to do fun shell things with ease. Cog depends on cog modules to actually do anything. Like [cog-rsync](https://github.com/gearbox-built/cog-rsync) which makes use of [cog-envs](https://github.com/gearbox-built/cog-envs). By itself, cog is a means to making more shell scripting more fun 🎉
 
