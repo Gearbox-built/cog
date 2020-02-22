@@ -4,17 +4,17 @@ Script to automate lots of bash stuff
 
 `Usage: cog <command>`
 
-## • Prerequisites
+## ⚙︎ Prerequisites
 
 - bpkg - https://github.com/bpkg/bpkg
 
-## • Installing Cog
+## ⚙︎ Installing Cog
 
 ```sh
 curl -o- -L https://raw.githubusercontent.com/gearbox-built/cog/master/install.sh | bash
 ```
 
-## • Parameters
+## ⚙︎ Parameters
 
 *The rest coming...*
 
