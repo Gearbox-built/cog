@@ -24,7 +24,7 @@ curl -o- -L https://raw.githubusercontent.com/gearbox-built/cog/master/install.s
 
 `cog <command>`
 
-## 🛠 Local Development
+# 🛠 Local Development
 
 ### 1. Clone git repo
 ```sh
