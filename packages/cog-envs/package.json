@@ -1,0 +1,8 @@
+{
+  "name": "cog-envs",
+  "version": "0.0.1",
+  "description": "Cog module to enable env file support",
+  "dependencies": {
+    "gearbox-built/cog": "^1.0.0"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "cog-wp",
+  "version": "0.0.1",
+  "description": "Cog module for WordPress",
+  "dependencies": {
+    "gearbox-built/cog": "^1.0.0"
+  }
+}
