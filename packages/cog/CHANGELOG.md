@@ -5,12 +5,4 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [0.0.2](https://github.com/gearbox-built/cog/compare/v0.0.1...v0.0.2) (2021-01-08)
 
-**Note:** Version bump only for package @cog/clear-port
-
-
-
-
-
-## [0.0.1](https://github.com/gearbox-built/cog/compare/v1.0.1...v0.0.1) (2021-01-08)
-
-**Note:** Version bump only for package @cog/clear-port
+**Note:** Version bump only for package cog
