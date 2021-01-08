@@ -1,6 +1,2 @@
 # Git ignore
-deps
-deps/*
-logs
-logs/*
 .DS_Store
