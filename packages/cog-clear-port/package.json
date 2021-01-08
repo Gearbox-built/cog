@@ -1,4 +1,5 @@
 {
   "name": "@cog/clear-port",
+  "version": "0.0.0",
   "description": "Cog module for clearing ports"
 }
