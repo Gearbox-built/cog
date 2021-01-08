@@ -1,9 +1,4 @@
 {
-  "name": "cog-rsync",
-  "version": "0.0.1",
-  "description": "Cog module for rsync",
-  "global": "false",
-  "dependencies": {
-    "gearbox-built/cog": "^1.0.0"
-  }
+  "name": "@cog/rsync",
+  "description": "Cog module for rsync"
 }

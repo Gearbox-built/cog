@@ -1,13 +1,4 @@
 {
-  "name": "cog-rsync",
-  "version": "0.0.1",
-  "description": "Cog module for rsync",
-  "global": "false",
-  "files": [
-    "cog-rsync.sh",
-    "lib/requirements.sh"
-  ],
-  "dependencies": [
-    "gearbox-built/cog-envs"
-  ]
+  "name": "@cog/clear-port",
+  "description": "Cog module for clearing ports"
 }
